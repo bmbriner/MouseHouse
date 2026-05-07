@@ -9,6 +9,8 @@ def main():
     import random
     player = player_class()
 
+    grass=pygame.image.load("sprites/grass.png")
+    grass_scaled = pygame.transform.scale(grass, (1000, 600))
     clock = pygame.time.Clock()
     window = pygame.display.set_mode((1200, 800))
     window_width = window.get_width()
@@ -460,7 +462,15 @@ def main():
         player.animation_counter += 1
 
         #plank2_collision = pygame.Rect(0-camera_x,300-camera_y,600, 30)
-
+        window.blit(grass_scaled,(500-camera_x,200-camera_y))
+        window.blit(grass_scaled,(0-camera_x,200-camera_y))
+        window.blit(grass_scaled,(1000-camera_x,200-camera_y))
+        window.blit(grass_scaled,(1500-camera_x,200-camera_y))
+        window.blit(grass_scaled,(2000-camera_x,200-camera_y))
+        window.blit(grass_scaled,(-500-camera_x,200-camera_y))
+        window.blit(grass_scaled,(-1000-camera_x,200-camera_y))
+        window.blit(grass_scaled,(-1500-camera_x,200-camera_y))
+        window.blit(grass_scaled,(-2000-camera_x,200-camera_y))
         window.blit(wall_scaled,(1800-camera_x,200-camera_y))
         window.blit(wall_scaled, (-550 - camera_x, 200 - camera_y))
         window.blit(wall_scaled,(0-camera_x,200-camera_y))
