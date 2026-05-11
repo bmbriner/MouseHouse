@@ -8,9 +8,9 @@ def main():
 
     import random
     player = player_class()
-
+    eat_noise=pygame.mixer.Sound("audio/apple_bite.ogg")
     grass=pygame.image.load("sprites/grass.png")
-    grass_scaled = pygame.transform.scale(grass, (1000, 600))
+    grass_scaled = pygame.transform.scale(grass, (600, 300))
     clock = pygame.time.Clock()
     window = pygame.display.set_mode((1200, 800))
     window_width = window.get_width()
@@ -467,10 +467,31 @@ def main():
         window.blit(grass_scaled,(1000-camera_x,200-camera_y))
         window.blit(grass_scaled,(1500-camera_x,200-camera_y))
         window.blit(grass_scaled,(2000-camera_x,200-camera_y))
+        window.blit(grass_scaled,(2500-camera_x,200-camera_y))
         window.blit(grass_scaled,(-500-camera_x,200-camera_y))
         window.blit(grass_scaled,(-1000-camera_x,200-camera_y))
         window.blit(grass_scaled,(-1500-camera_x,200-camera_y))
         window.blit(grass_scaled,(-2000-camera_x,200-camera_y))
+        window.blit(grass_scaled,(-500-camera_x,400-camera_y))
+        window.blit(grass_scaled,(-1000-camera_x,400-camera_y))
+        window.blit(grass_scaled,(-1500-camera_x,400-camera_y))
+        window.blit(grass_scaled,(-2000-camera_x,400-camera_y))
+        window.blit(grass_scaled,(0-camera_x,400-camera_y))
+        window.blit(grass_scaled,(1000-camera_x,400-camera_y))
+        window.blit(grass_scaled,(1500-camera_x,400-camera_y))
+        window.blit(grass_scaled,(2000-camera_x,400-camera_y))
+        window.blit(grass_scaled,(500-camera_x,400-camera_y))
+        window.blit(grass_scaled,(2500-camera_x,400-camera_y))
+        window.blit(grass_scaled,(-2000-camera_x,600-camera_y))
+        window.blit(grass_scaled,(-1500-camera_x,600-camera_y))
+        window.blit(grass_scaled,(-1000-camera_x,600-camera_y))
+        window.blit(grass_scaled,(-500-camera_x,600-camera_y))
+        window.blit(grass_scaled,(0-camera_x,600-camera_y))
+        window.blit(grass_scaled,(500-camera_x,600-camera_y))
+        window.blit(grass_scaled,(1000-camera_x,600-camera_y))
+        window.blit(grass_scaled,(1500-camera_x,600-camera_y))
+        window.blit(grass_scaled,(2000-camera_x,600-camera_y))
+        window.blit(grass_scaled,(2500-camera_x,600-camera_y))
         window.blit(wall_scaled,(1800-camera_x,200-camera_y))
         window.blit(wall_scaled, (-550 - camera_x, 200 - camera_y))
         window.blit(wall_scaled,(0-camera_x,200-camera_y))
@@ -635,6 +656,7 @@ def main():
                         elif i==19:
                             eaten.append(0)
                             not_eaten.remove(0)
+                        eat_noise.play()
                         cheese=True
                         break
 
@@ -721,9 +743,12 @@ def main():
             if cat_rect.colliderect(plank2_collision) or cat_rect.colliderect(plank2_collision2) or cat_rect.colliderect(plank2_collision3) or cat_rect.colliderect(plank2_collision4):
                 cat_rect.x = cat_rect.x + cat_speed
             if cat_velocity_y<0:
-                if cat_rect.y - player.rect.y < 40 or cat_rect.y + player.rect.y < -20:
+                if cat_rect.y - player.rect.y < 10 or cat_rect.y + player.rect.y < -20:
+                    cat_rect.x=cat_rect.x + cat_speed
                     go_around_up = False
+
             elif cat_rect.y-player.rect.y< 20 or cat_rect.y+player.rect.y< -20:
+                cat_rect.x = cat_rect.x + cat_speed
                 go_around_up = False
             elif cat_velocity_y < 0:
                 cat_rect.x = cat_rect.x+cat_speed
@@ -895,6 +920,7 @@ def main():
                     display_message[number] = True
                     message_timer = 0
                     powered[number] = True
+
             elif powered[number]==True:
                 if powers[number]==11:
                     game_over=True
@@ -1002,7 +1028,7 @@ def main():
 
         if game_over==True:
             window.fill((0,0,0))
-            gamedisplay=font3.render("GAME OVER! you secaped!",True,(255,255,255))
+            gamedisplay=font3.render("GAME OVER! you escaped!",True,(255,255,255))
             pygame.time.wait(2000)
             running=False
 
